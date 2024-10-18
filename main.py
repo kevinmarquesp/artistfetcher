@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import re
-from typing import TypedDict, ReadOnly, Optional
+from typing import TypedDict, Optional
 from ytmusicapi import YTMusic
 import json
 import os
@@ -91,8 +91,8 @@ def parse_range(notation: str, group=False) -> list[int] | list[tuple[int]]:
 
 class Artist(TypedDict):
     """All information of an artist necessary to fetch the other songs."""
-    name: ReadOnly[str]
-    browse_id: ReadOnly[str]  # Used to browse the albums, videos, etc.
+    name: str
+    browse_id: str  # Used to browse the albums, videos, etc.
 
 
 def search_artists(ytmusic: YTMusic, query: str) -> list[Artist]:
@@ -106,8 +106,8 @@ def search_artists(ytmusic: YTMusic, query: str) -> list[Artist]:
 
 class Album(TypedDict):
     """Minimal album information to browse it's tracks."""
-    title: ReadOnly[str]
-    browse_id: ReadOnly[str]  # Used to browse it's contents.
+    title: str
+    browse_id: str  # Used to browse it's contents.
 
 
 def get_artist_albums(ytmusic: YTMusic, artist_browse_id: str) -> list[Album]:
@@ -139,8 +139,8 @@ def get_artist_albums(ytmusic: YTMusic, artist_browse_id: str) -> list[Album]:
 
 class Song(TypedDict):
     """Minimal song information to allow the user to, e.g., download it."""
-    title: ReadOnly[str]
-    video_id: ReadOnly[str]  # Used to allow the user to do anything they want.
+    title: str
+    video_id: str  # Used to allow the user to do anything they want.
 
 
 def get_album_tracks(ytmusic: YTMusic, album_browse_id: str) -> list[Song]:
@@ -181,13 +181,13 @@ def get_artist_singles(ytmusic: YTMusic, artist_browse_id: str) -> list[Album]:
 
 class ArtistData(TypedDict):
     """Song's data that's useful for the user for downloading into their PC."""
-    artist_name: ReadOnly[str]
-    artist_browse_id: ReadOnly[str]
-    song_title: ReadOnly[str]
-    song_video_id: ReadOnly[str]
-    album_title: ReadOnly[Optional[str]]
-    album_browse_id: ReadOnly[Optional[str]]
-    local_path: ReadOnly[str]
+    artist_name: str
+    artist_browse_id: str
+    song_title: str
+    song_video_id: str
+    album_title: Optional[str]
+    album_browse_id: Optional[str]
+    local_path: str
 
 
 def escape_filename_characters(filename: str) -> str:
